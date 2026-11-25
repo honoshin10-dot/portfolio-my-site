@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>矢野歩香 YANO HONOKA | Personal Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #F5F5F7;
+      --bg-card: #FFFFFF;
+      --bg-accent: #1D1D1F;
+      --text-primary: #1D1D1F;
+      --text-secondary: #6E6E73;
+      --text-on-accent: #FFFFFF;
+      --text-muted-on-accent: #A1A1A6;
+      --pill-bg: #F5F5F7;
+      --pill-text: #1D1D1F;
+      --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --radius-card: 28px;
+      --gap-grid: 16px;
+      --font-latin: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-cjk: 'Noto Sans TC', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #000000;
+      --bg-card: #1C1C1E;
+      --bg-accent: #2C2C2E;
+      --text-primary: #F5F5F7;
+      --text-secondary: #98989D;
+      --text-on-accent: #FFFFFF;
+      --text-muted-on-accent: #AEAEB2;
+      --pill-bg: #2C2C2E;
+      --pill-text: #F5F5F7;
+      --shadow-card: 0 1px 2px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-latin), var(--font-cjk);
+      font-size: 16px;
+      line-height: 1.6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .top-tag {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .theme-toggle {
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: none;
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s ease, background-color 0.25s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.03);
+    }
+
+    /* Bento Grid System */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap-grid);
+    }
+
+    .tile {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tile:hover {
+      transform: scale(1.02);
+    }
+
+    /* Single Dark Accent Tile */
+    .tile-accent {
+      background-color: var(--bg-accent);
+      color: var(--text-on-accent);
+    }
+
+    .tile-accent .label {
+      color: var(--text-muted-on-accent);
+    }
+
+    .tile-accent p {
+      color: var(--text-on-accent);
+    }
+
+    /* Typography */
+    .label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    h1.hero-name {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero-en {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .big-stat {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 8px 0;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .muted {
+      color: var(--text-secondary);
+    }
+
+    /* Photo Placeholder Tile */
+    .photo-box {
+      width: 100%;
+      min-height: 240px;
+      height: 100%;
+      border-radius: 20px;
+      background-color: var(--pill-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Pills / Tags */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      background-color: var(--pill-bg);
+      color: var(--pill-text);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Lists inside tiles */
+    .item-block {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    }
+
+    .item-block:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* Contact Buttons */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background-color: var(--text-primary);
+      color: var(--bg-card);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background-color: var(--pill-bg);
+      color: var(--text-primary);
+    }
+
+    /* Tablet: 768px (2 Columns) */
+    @media (min-width: 768px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .span-2-md {
+        grid-column: span 2;
+      }
+    }
+
+    /* Desktop: 1280px+ (12-Column Grid with 3-Column visual rhythm) */
+    @media (min-width: 1280px) {
+      .bento-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .col-8 { grid-column: span 8; }
+      .col-6 { grid-column: span 6; }
+      .col-4 { grid-column: span 4; }
+      .col-12 { grid-column: span 12; }
+      .row-2 { grid-row: span 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="top-bar">
+      <span class="top-tag">Portfolio · 2027 Graduate</span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">Dark Mode</button>
+    </header>
+
+    <main class="bento-grid">
+      <!-- 1. Hero Tile: Name + One-line Intro -->
+      <section class="tile col-8 span-2-md">
+        <div>
+          <span class="label">Introduction</span>
+          <h1 class="hero-name">矢野歩香</h1>
+          <div class="hero-en">YANO HONOKA</div>
+        </div>
+        <p>結合日文母語、中文商務實戰與資管數位思維，用設計感與行動力跨越文化邊界的跨領域實踐者。</p>
+      </section>
+
+      <!-- 2. Tall Tile: Photo -->
+      <aside class="tile col-4 row-2">
+        <span class="label">Portrait</span>
+        <div class="photo-box">
+          <span>個人照片區塊</span>
+          <span style="font-size: 14px; margin-top: 6px;">（待確認：請替換為個人形象照）</span>
+        </div>
+      </aside>
+
+      <!-- 3. About Me -->
+      <section class="tile col-4">
+        <div>
+          <span class="label">About Me · 關於我</span>
+          <h2>開南大學 資訊管理學系</h2>
+          <p class="muted">2027年6月畢業（大學四年級）</p>
+        </div>
+        <p style="margin-top: 12px;">大一就讀應用華語系打下語言基礎，大二轉入資管系。致力於結合商業邏輯、資訊技術與跨文化溝通，創造實際商業價值。</p>
+      </section>
+
+      <!-- 4. Dark Accent Tile: Target Role -->
+      <section class="tile tile-accent col-4">
+        <div>
+          <span class="label">Career Target · 想找的工作</span>
+          <h2>業務 Sales / 設計 Design</h2>
+        </div>
+        <div>
+          <p>目標產業：廣告代理商、綜合商社</p>
+          <p style="margin-top: 4px; color: var(--text-muted-on-accent);">希望地點：日本東京（2028新卒）</p>
+        </div>
+      </section>
+
+      <!-- 5. Small Stat Tile 1 -->
+      <section class="tile col-4">
+        <span class="label">B2B &amp; Field Sales</span>
+        <div class="big-stat">30家</div>
+        <p>日本暑期實習期間，2個月內成功開發並簽約的中華料理餐廳數。</p>
+      </section>
+
+      <!-- 6. Small Stat Tile 2 -->
+      <section class="tile col-4">
+        <span class="label">Leadership</span>
+        <div class="big-stat">全國3連霸</div>
+        <p>擔任近畿大學附屬高中吹奏樂部部長，帶領團隊達成交響爵士全國大賽三連霸。</p>
+      </section>
+
+      <!-- 7. Small Stat Tile 3 -->
+      <section class="tile col-4">
+        <span class="label">Languages</span>
+        <div class="big-stat">日 / 中</div>
+        <p>日語母語程度、中文商務流利（TOCFL檢定合格），具備雙語簡報與開發能力。</p>
+      </section>
+
+      <!-- 8. Projects -->
+      <section class="tile col-6 span-2-md">
+        <div>
+          <span class="label">Projects · 作品與專案</span>
+          <div class="item-block">
+            <h3>畢業專題：Well-being App</h3>
+            <p class="muted">負責：企劃立案、UI/UX 視覺設計、季節像素風系統設計</p>
+            <p style="margin-top: 6px;">結合四季變化成長的像素風樹木與目標養成機制，協助青少年建立正向生活習慣。</p>
+            <div class="pill-group">
+              <span class="pill">Gemini</span>
+              <span class="pill">Manus</span>
+              <span class="pill">Figma</span>
+              <span class="pill">Canva</span>
+              <span class="pill">網址：待確認</span>
+            </div>
+          </div>
+          <div class="item-block">
+            <h3>YouTube 頻道：教えて台湾</h3>
+            <p class="muted">負責：企劃、拍攝剪輯、每週定期直播（網址：待確認）</p>
+            <p style="margin-top: 6px;">向日本觀眾介紹台灣在地美食、文化與留學生活，累積跨文化社群影響力。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Experience (Wide Tile) -->
+      <section class="tile col-6 span-2-md">
+        <div>
+          <span class="label">Experience · 實習與經歷</span>
+          <div class="item-block">
+            <h3>矽瑪科技股份有限公司｜B2B 業務實習生</h3>
+            <p>針對日本醫療器材與電子製造企業（如京瓷、朝日 Intecc）進行日文陌生開發與客戶對接。</p>
+          </div>
+          <div class="item-block">
+            <h3>日本外送平台拓展｜夏季業務實習生</h3>
+            <p>為中華料理餐廳客製日文圖文菜單解決痛點，2個月內完成 30 家店鋪簽約。</p>
+          </div>
+          <div class="item-block">
+            <h3>鳥貴族（台灣門市）＆ 社團幹部經歷</h3>
+            <p>兼顧每週 4 天餐飲服務與大學熱舞社社長、Journey &amp; Journey IG 視覺行銷設計。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. Skills -->
+      <section class="tile col-4">
+        <div>
+          <span class="label">Skills · 技能與工具</span>
+          <h2>數位與設計工具</h2>
+        </div>
+        <div class="pill-group">
+          <span class="pill">Canva（熟練）</span>
+          <span class="pill">Gemini / Manus</span>
+          <span class="pill">Figma</span>
+          <span class="pill">Studio</span>
+          <span class="pill">HTML / CSS</span>
+          <span class="pill">Git / GitHub</span>
+          <span class="pill">Google Sheets</span>
+          <span class="pill">ITS 認證備考中</span>
+        </div>
+      </section>
+
+      <!-- 11. Traits -->
+      <section class="tile col-4">
+        <div>
+          <span class="label">Strengths · 特質與價值觀</span>
+          <h2>利他提案與行動力</h2>
+          <p style="margin-top: 8px;">秉持「物事は捉え方次第（事物的幸福取決於看待角度）」。擅長洞察對方需求並快速落地執行，將台灣技術與日本商業需求精準對接。</p>
+        </div>
+      </section>
+
+      <!-- 12. Interests -->
+      <section class="tile col-4">
+        <div>
+          <span class="label">Interests · 興趣與自學</span>
+          <h2>藝術、音樂與運動</h2>
+        </div>
+        <div class="pill-group">
+          <span class="pill">長笛 / 中音薩克斯風</span>
+          <span class="pill">Hip-hop / Amapiano</span>
+          <span class="pill">油畫與摺紙</span>
+          <span class="pill">多肉植物栽培</span>
+          <span class="pill">慢跑 / 瑜伽 / 足球</span>
+          <span class="pill">哲學與行為心理學</span>
+        </div>
+      </section>
+
+      <!-- 13. Contact -->
+      <footer class="tile col-12 span-2-md">
+        <div>
+          <span class="label">Contact · 聯絡方式</span>
+          <h2>歡迎與我聯繫</h2>
+          <p class="muted">目前聯繫連結標記為「待確認」，補上網址後即可直接點擊跳轉。</p>
+        </div>
+        <div class="btn-group">
+          <a href="#contact-email" class="btn" onclick="alert('Email：待確認'); return false;">Email（待確認）</a>
+          <a href="#contact-github" class="btn btn-secondary" onclick="alert('GitHub：待確認'); return false;">GitHub（待確認）</a>
+          <a href="#contact-linkedin" class="btn btn-secondary" onclick="alert('LinkedIn：待確認'); return false;">LinkedIn（待確認）</a>
+          <a href="#contact-ig" class="btn btn-secondary" onclick="alert('Instagram：待確認'); return false;">Instagram（待確認）</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const rootEl = document.documentElement;
+
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = rootEl.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        rootEl.removeAttribute('data-theme');
+        toggleBtn.textContent = 'Dark Mode';
+      } else {
+        rootEl.setAttribute('data-theme', 'dark');
+        toggleBtn.textContent = 'Light Mode';
+      }
+    });
+  </script>
+</body>
+</html>
